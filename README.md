@@ -1,1 +1,3 @@
-# simple toggle 
+# simple toggle
+
+# delete contact

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Contact from '../components/Contact'
+import Contact from "../components/Contact";
 
 class Contacts extends Component {
   constructor() {
@@ -29,13 +29,24 @@ class Contacts extends Component {
       ],
     };
   }
+
+  handleDeleteContact = (id) => {
+    const { contacts } = this.state
+
+    const newContacts = contacts.filter(contact => contact.id !== id)
+    this.setState({
+      contacts: newContacts
+    })
+  }
+
   render() {
     const { contacts } = this.state;
     return (
       <>
         {contacts.map(contact => (
-          <Contact key={contact.id} contact={contact} />
+          <Contact onDeleteContact={this.handleDeleteContact} key={contact.id} contact={contact} />
         ))}
+        {contacts.length <= 0 && <h1>No Contacts Here...</h1>}
       </>
     );
   }

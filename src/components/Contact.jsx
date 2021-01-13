@@ -6,11 +6,15 @@ class Contact extends React.Component {
     showContactInfo: false,
   };
 
-  handleShowClick = e => {
+  handleShow = e => {
     this.setState({
       showContactInfo: !this.state.showContactInfo,
     });
   };
+
+  onDeleteContact = (id) => {
+    this.props.onDeleteContact(id)
+  }
 
   render() {
     const { contact } = this.props;
@@ -19,7 +23,8 @@ class Contact extends React.Component {
       <div className='card card-body mb-3'>
         <h3>
           {contact.name}{" "}
-          <i onClick={this.handleShowClick} className='fas fa-sort-down'></i>
+          <i onClick={this.handleShow} style={{cursor: 'pointer'}} className='fas fa-sort-down'></i>
+          <i onClick={() => this.onDeleteContact(contact.id)} style={{cursor: 'pointer', float: 'right', color: 'red'}} className='fas fa-times'></i>
         </h3>
         {showContactInfo ? (
           <ul className='list-group'>
